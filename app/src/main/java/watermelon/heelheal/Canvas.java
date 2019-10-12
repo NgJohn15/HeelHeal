@@ -36,6 +36,11 @@ public class Canvas extends View
 
     }
 
+    public double getMaxLength()
+    {
+        //N factorial thing
+    }
+
     @Override
     protected void onDraw(android.graphics.Canvas canvas)
     {

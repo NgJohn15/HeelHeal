@@ -35,7 +35,6 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity
 {
-    public static final int PICK_IMAGE = 1;
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
     ImageView imageView;
@@ -70,28 +69,6 @@ public class MainActivity extends AppCompatActivity
                 } else
                 {
                     pickImage();
-//                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
-//
-//                    Uri selectedImage = intent.getData();
-//                    String filepath = selectedImage.getPath();
-//                    System.out.println(filepath);
-//                    System.out.println("==============================IMAGE=====================: " +selectedImage.toString());
-//
-//                    ImageView imageView = (ImageView) findViewById(R.id.imageView);
-//                    Drawable myDrawable;
-//                    try {
-//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),selectedImage);
-//                        imageView.setImageBitmap(bitmap);
-////                        InputStream inputStream = getContentResolver().openInputStream(selectedImage);
-////                        myDrawable = Drawable.createFromStream(inputStream, selectedImage.toString() );
-////                        imageView.setBackground(myDrawable);
-////                        imageView.setImageDrawable(myDrawable);
-////                    imageView.setImageDrawable((myDrawable));
-//                    }
-//                    catch (Exception e) {
-//                        myDrawable = getResources().getDrawable(R.drawable.ic_launcher_background);
-//                    }
                 }
             }
         });
