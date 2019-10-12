@@ -2,12 +2,8 @@ package watermelon.heelheal;
 
 import android.content.Intent;
 import android.Manifest;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,12 +11,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,8 +27,6 @@ public class MainActivity extends AppCompatActivity
     private static final int IMAGE_PICK_CODE = 1000;
     public static final int PERMISSION_CODE = 1001;
     public static Uri currentImageURI;
-    public static ImageView imageView;
-    public static Bitmap bitmap;
 
 
     @Override
