@@ -15,21 +15,25 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Results:"/>
+            android:text="Results:"
+            android:id="@+id/results_title"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wound Surface Area:"/>
+            android:text="Wound Surface Area:"
+            android:id="@+id/surface_area"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wound Perimeter:"/>
+            android:text="Wound Perimeter:"
+            android:id="@+id/perimeter"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wound max length (diameter):"/>
+            android:text="Wound max length (diameter):"
+            android:id="@+id/max_length"/>
 
         <TextView
             android:layout_width="wrap_content"

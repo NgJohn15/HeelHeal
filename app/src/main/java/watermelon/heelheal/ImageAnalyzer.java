@@ -1,7 +1,10 @@
 package watermelon.heelheal;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -9,14 +12,17 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.net.Uri;
 
 import org.w3c.dom.Text;
 
@@ -33,12 +39,28 @@ public class ImageAnalyzer extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_analyzer);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        ImageView imageView = findViewById(R.id.wound_image);
+        System.out.println(MainActivity.currentImageURI);
+        LinearLayout linearLayout = findViewById(R.id.linear_layout_image_analyzer);
+
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
+        {
+            // request user for location access
+            ActivityCompat.requestPermissions(getParent(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+            requestPermissions(permissions, MainActivity.PERMISSION_CODE);
+        } else
+        {
+            System.out.println("here");
+            imageView.setImageURI(MainActivity.currentImageURI);
+//            linearLayout.addView(MainActivity.imageView);
+//            imageView.setImageBitmap(MainActivity.bitmap);
+//            imageView.setBackgroundColor(Color.BLACK);
+//            System.out.println(MainActivity.bitmap.getPixel(0,0));
+
+        }
 
         canvas = new Canvas(this,null);
-        setContentView(R.layout.image_analyzer);
-        LinearLayout linearLayout = findViewById(R.id.linear_layout_image_analyzer);
         linearLayout.addView(canvas);
         final TextView textView = findViewById(R.id.instructions);
 //        FloatingActionButton fab = new FloatingActionButton(this);
@@ -69,13 +91,15 @@ public class ImageAnalyzer extends AppCompatActivity
                         SharedPreferences.Editor editor = pref.edit();
                         int numOfResults = pref.getInt("numOfResults",0);
                         Set<String> resultSet = pref.getStringSet("resultSet", new HashSet<String>());
-                        String newResult = "Result #" + numOfResults+1 + "\n" +
-                                        "Surface Area: "+ canvas.polygonArea(1) + "\n"
-                        + "Perimeter: "+ canvas.polygonArea(1) + "\n" +
+                        String newResult = "Result #" + (numOfResults+1) + "\n" +
+                                        "surface_area:"+ canvas.polygonArea(1) + "\n"
+                        + "perimeter:"+ canvas.getPerimeter(1) + "\n"+"max_length:"+99999+
+                                "\n"+ "ppi:"+
                                 pixelsPerInch;
                         resultSet.add(newResult);
                         editor.putStringSet("resultSet",resultSet);
-                        editor.commit();
+                        editor.putInt("numOfResults", numOfResults + 1);
+                        editor.apply();
                         Intent intent = new Intent(getApplicationContext(), ResultsActivity.class);
                         intent.putExtra("Info:",newResult);
                         startActivity(intent);

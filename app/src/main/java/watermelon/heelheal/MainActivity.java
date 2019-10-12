@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -38,8 +40,10 @@ public class MainActivity extends AppCompatActivity
 {
     public static final int PICK_IMAGE = 1;
     private static final int IMAGE_PICK_CODE = 1000;
-    private static final int PERMISSION_CODE = 1001;
-    ImageView imageView;
+    public static final int PERMISSION_CODE = 1001;
+    public static Uri currentImageURI;
+    public static ImageView imageView;
+    public static Bitmap bitmap;
 
 
     @Override
@@ -96,8 +100,7 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
-        Intent intent = new Intent(this, ImageAnalyzer.class);
-        startActivity(intent);
+
     }
 
     private void pickImage()
@@ -114,10 +117,17 @@ public class MainActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE)
         {
-            // set image view
-            imageView.setImageURI(data.getData());
+            Intent intent = new Intent(this, ImageAnalyzer.class);
+            currentImageURI = data.getData();
+//            imageView.setImageURI(data.getData());
+//            BitmapDrawable draw = (BitmapDrawable) imageView.getDrawable();
+//            bitmap = draw.getBitmap();
+//            CoordinatorLayout parent = findViewById(R.id.image_parent);
+//            parent.removeView(imageView);
+            startActivity(intent);
 
         }
+
     }
 
     @Override

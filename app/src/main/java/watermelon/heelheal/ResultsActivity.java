@@ -27,9 +27,29 @@ public class ResultsActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.results_view);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        System.out.println(getIntent().getStringExtra("Info:"));
+
+        String info = getIntent().getStringExtra("Info:");
+        String infos[] = info.split("\n");
+
+        TextView resultsTitleText = findViewById(R.id.results_title);
+        TextView surfaceAreaText = findViewById(R.id.surface_area);
+        TextView perimeterText = findViewById(R.id.perimeter);
+        TextView maxLengthText = findViewById(R.id.max_length);
+        double surface_area = Double.parseDouble(infos[1].split(":")[1]);
+        double perimeter = Double.parseDouble(infos[2].split(":")[1]);
+        double max_length = Double.parseDouble(infos[3].split(":")[1]);
+        double ppi = Double.parseDouble(infos[4].split(":")[1]);
+
+        resultsTitleText.setText(infos[0]);
+
+        surface_area /= ppi;
+        surfaceAreaText.setText("Wound Surface Area: " + surface_area + " square inches");
+
+        perimeter /= ppi;
+        perimeterText.setText("Wound Perimeter: " + perimeter + " inches");
+
+        max_length /= ppi;
+        maxLengthText.setText("Wound Max Length (diameter): " + max_length + " inches");
 
 
     }
