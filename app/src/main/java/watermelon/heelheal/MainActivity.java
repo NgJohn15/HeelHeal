@@ -3,6 +3,7 @@ package watermelon.heelheal;
 import android.content.Intent;
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -20,7 +21,12 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -38,7 +44,28 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
 
+        LinearLayout linearLayout = findViewById(R.id.results_list);
+        Set<String> resultSet = pref.getStringSet("resultSet", new HashSet<String>());
+        for (String s : resultSet)
+        {
+            TextView textView = new TextView(this);
+            textView.setText(s.split("\n")[0]);
+            textView.setTextSize(25);
+            final String info = s;
+            textView.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    Intent intent = new Intent(getApplicationContext(), ResultsActivity.class);
+                    intent.putExtra("Info:",info);
+                    startActivity(intent);
+                }
+            });
+            linearLayout.addView(textView);
+        }
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {

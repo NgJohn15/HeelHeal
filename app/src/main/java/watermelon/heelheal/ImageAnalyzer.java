@@ -93,7 +93,7 @@ public class ImageAnalyzer extends AppCompatActivity
                         Set<String> resultSet = pref.getStringSet("resultSet", new HashSet<String>());
                         String newResult = "Result #" + (numOfResults+1) + "\n" +
                                         "surface_area:"+ canvas.polygonArea(1) + "\n"
-                        + "perimeter:"+ canvas.getPerimeter(1) + "\n"+"max_length:"+99999+
+                        + "perimeter:"+ canvas.getPerimeter(1) + "\n"+"max_length:"+canvas.getMaxLength()+
                                 "\n"+ "ppi:"+
                                 pixelsPerInch;
                         resultSet.add(newResult);
