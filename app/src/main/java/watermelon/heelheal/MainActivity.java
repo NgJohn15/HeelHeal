@@ -1,5 +1,6 @@
 package watermelon.heelheal;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+        Intent intent = new Intent(this, ImageAnalyzer.class);
+        startActivity(intent);
     }
 
     @Override
