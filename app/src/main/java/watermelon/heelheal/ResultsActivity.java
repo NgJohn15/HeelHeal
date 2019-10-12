@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,6 +36,8 @@ public class ResultsActivity extends AppCompatActivity
         TextView surfaceAreaText = findViewById(R.id.surface_area);
         TextView perimeterText = findViewById(R.id.perimeter);
         TextView maxLengthText = findViewById(R.id.max_length);
+        TextView healingText = findViewById(R.id.healing_time);
+        ImageView results_imag = findViewById(R.id.results_image);
         double surface_area = Double.parseDouble(infos[1].split(":")[1]);
         double perimeter = Double.parseDouble(infos[2].split(":")[1]);
         double max_length = Double.parseDouble(infos[3].split(":")[1]);
@@ -42,7 +45,7 @@ public class ResultsActivity extends AppCompatActivity
 
         resultsTitleText.setText(infos[0]);
 
-        surface_area /= ppi;
+        surface_area /= Math.pow(ppi,2);
         surfaceAreaText.setText("Wound Surface Area: " + surface_area + " square inches");
 
         perimeter /= ppi;
@@ -51,6 +54,12 @@ public class ResultsActivity extends AppCompatActivity
         max_length /= ppi;
         maxLengthText.setText("Wound Max Length (diameter): " + max_length + " inches");
 
+        double mmlength = max_length*25.4;
+        int conservativeTime = (int) Math.ceil(mmlength/5);
+        int longTime = (int) Math.ceil(mmlength/1);
+        healingText.setText("Wound will heal " + conservativeTime + " to " + longTime + " weeks.");
+
+        results_imag.setImageURI(MainActivity.currentImageURI);
 
     }
 
