@@ -1,5 +1,7 @@
 package watermelon.heelheal;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -17,6 +19,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class ImageAnalyzer extends AppCompatActivity
 {
@@ -58,6 +63,23 @@ public class ImageAnalyzer extends AppCompatActivity
                 {
                     pixelsPerInch = canvas.getPixelsPerInch();
                     System.out.println(pixelsPerInch);
+                    if (pixelsPerInch != 0)
+                    {
+                        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                        SharedPreferences.Editor editor = pref.edit();
+                        int numOfResults = pref.getInt("numOfResults",0);
+                        Set<String> resultSet = pref.getStringSet("resultSet", new HashSet<String>());
+                        String newResult = "Result #" + numOfResults+1 + "\n" +
+                                        "Surface Area: "+ canvas.polygonArea(1) + "\n"
+                        + "Perimeter: "+ canvas.polygonArea(1) + "\n" +
+                                pixelsPerInch;
+                        resultSet.add(newResult);
+                        editor.putStringSet("resultSet",resultSet);
+                        editor.commit();
+                        Intent intent = new Intent(getApplicationContext(), ResultsActivity.class);
+                        intent.putExtra("Info:",newResult);
+                        startActivity(intent);
+                    }
                 }
             }
         });
