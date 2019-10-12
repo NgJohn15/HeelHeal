@@ -87,7 +87,7 @@ public class ResultsActivity extends AppCompatActivity
                 System.arraycopy(resultSet.toArray(), 0, arr, 0, n);
                 final String options[] = arr;
                 AlertDialog.Builder builder = new AlertDialog.Builder(ResultsActivity.this);
-                builder.setTitle("Pick a color");
+                builder.setTitle("Pick a previous result:");
                 builder.setItems(options, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
