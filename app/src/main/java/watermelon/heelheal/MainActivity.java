@@ -1,37 +1,20 @@
 package watermelon.heelheal;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.provider.MediaStore;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-
 
 public class MainActivity extends AppCompatActivity
 {
@@ -43,10 +26,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        System.out.println("TEST 0");
         super.onCreate(savedInstanceState);
         imageView = (ImageView) findViewById(R.id.imageView);
-        System.out.println("TEST B");
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,19 +36,18 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener()
         {
 
-
             @Override
             public void onClick(View view)
             {
-                // Prompt user to upload a file.
+                // Prompt user for access
                 if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
                 {
-                    // request user for location access
                     ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                     String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
                     requestPermissions(permissions, PERMISSION_CODE);
                 } else
                 {
+                    // Grab an image from internal storage and display the image
                     pickImage();
                 }
             }
@@ -90,10 +70,10 @@ public class MainActivity extends AppCompatActivity
         {
             // set image view
             imageView.setImageURI(data.getData());
-
         }
     }
 
+    // Should permission be deny asked user for permissions
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
     {
