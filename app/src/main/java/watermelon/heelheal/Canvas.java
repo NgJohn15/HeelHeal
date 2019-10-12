@@ -20,7 +20,6 @@ public class Canvas extends View
     Paint paint;
     Path path;
     List<Integer> coordinates = new LinkedList<>();
-    boolean done = false;
     List<Integer> inches = new LinkedList<>();
     String stage = "perimeter";
 
@@ -74,6 +73,7 @@ public class Canvas extends View
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        System.out.println("jgfggggggggg");
         float xPos = event.getX();
         float yPos = event.getY();
         switch (event.getAction())

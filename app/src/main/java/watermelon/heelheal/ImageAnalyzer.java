@@ -40,25 +40,15 @@ public class ImageAnalyzer extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_analyzer);
         ImageView imageView = findViewById(R.id.wound_image);
-        System.out.println(MainActivity.currentImageURI);
         LinearLayout linearLayout = findViewById(R.id.linear_layout_image_analyzer);
 
-        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
-        {
-            // request user for location access
-            ActivityCompat.requestPermissions(getParent(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
-            requestPermissions(permissions, MainActivity.PERMISSION_CODE);
-        } else
-        {
-            System.out.println("here");
+
             imageView.setImageURI(MainActivity.currentImageURI);
 //            linearLayout.addView(MainActivity.imageView);
 //            imageView.setImageBitmap(MainActivity.bitmap);
 //            imageView.setBackgroundColor(Color.BLACK);
 //            System.out.println(MainActivity.bitmap.getPixel(0,0));
 
-        }
 
         canvas = new Canvas(this,null);
         linearLayout.addView(canvas);
