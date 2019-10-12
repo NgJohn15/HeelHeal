@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -34,6 +35,32 @@ public class Canvas extends View
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(5f);
 
+    }
+
+    public double getDistance(double x1, double y1, double x2, double y2)
+    {
+        return Math.sqrt(Math.pow((x2-x1), 2) + (Math.pow((y2-y1), 2)));
+    }
+
+    public double getMaxLength()
+    {
+        double maxDistance = 0;
+        for (int coord : coordinates)
+        {
+            for (int coord1: coordinates)
+            {
+                double x1 = coord/100000;
+                double y1 = coord%100000;
+                double x2 = coord1/100000;
+                double y2 = coord1%100000;
+                double temp = getDistance(x1, y1, x2, y2);
+                if (temp > maxDistance)
+                {
+                    maxDistance = temp;
+                }
+            }
+        }
+        return maxDistance;
     }
 
     @Override
