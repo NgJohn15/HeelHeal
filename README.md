@@ -8,7 +8,7 @@ A user takes a picture of their wound with a ruler for reference. The app then a
 This approximation is done by looking at the longest distance of the wound and calculating the wounds time based of a 1mm to 5mm healing process. Results will be saved locally and can be viewed at any later date.
     
 ## Why did we make it?  
-A professor at UNM works as a foot doctor, and the complaints he had were that many of the injuries could have been easily sorted and analyzed through automation. The current proudcts right now are slow and inefficient.
+A professor at UNM works as a foot doctor, and the complaints he had were that many of the injuries could have been easily sorted and analyzed through automation. The current products right now are slow and inefficient. This add is not only easy to use, but takes little to no time at all. Patients can have their wounds estimated and analyzed prior to seeing a doctor.
 
 ## How did we make it?  
 The entire project is written in native Java, using Android studio to create a funtional app and interface.  
