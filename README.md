@@ -12,3 +12,7 @@ A professor at UNM works as a foot doctor, and the complaints he had were that m
 
 ## How did we make it?  
 The entire project is written in native Java, using Android studio to create a funtional app and interface.  
+  
+## Who made this?  
+John Ng and Alan Shen during the 2019 Pitt Hackathon.  
+
