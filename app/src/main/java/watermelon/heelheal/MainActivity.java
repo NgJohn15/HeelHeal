@@ -38,14 +38,16 @@ public class MainActivity extends AppCompatActivity
     public static final int PICK_IMAGE = 1;
     private static final int IMAGE_PICK_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
-    ImageView imageView = findViewById(R.id.imageView);
-
+    ImageView imageView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        System.out.println("TEST 0");
         super.onCreate(savedInstanceState);
+        imageView = (ImageView) findViewById(R.id.imageView);
+        System.out.println("TEST B");
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,8 +67,8 @@ public class MainActivity extends AppCompatActivity
                     ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                     String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
                     requestPermissions(permissions, PERMISSION_CODE);
-                }
-                else {
+                } else
+                {
                     pickImage();
 //                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
@@ -105,22 +107,29 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        imageView = (ImageView) findViewById(R.id.imageView);
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == IMAGE_PICK_CODE)
         {
+            // set image view
             imageView.setImageURI(data.getData());
+
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
         switch (requestCode)
         {
-            case PERMISSION_CODE: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            case PERMISSION_CODE:
+            {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {
+                    // permission granted
                     pickImage();
-                }
-                else {
+                } else
+                {
                     // permission was denied
                     Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
                 }
@@ -149,7 +158,6 @@ public class MainActivity extends AppCompatActivity
         {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
