@@ -84,7 +84,7 @@ public class ImageAnalyzer extends AppCompatActivity
                 if (canvas.stage.equals("inch"))
                 {
                     pixelsPerInch = canvas.getPixelsPerInch();
-                    System.out.println(pixelsPerInch);
+                    if (pixelsPerInch == -1) return;
                     if (pixelsPerInch != 0)
                     {
                         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
@@ -103,6 +103,7 @@ public class ImageAnalyzer extends AppCompatActivity
                         Intent intent = new Intent(getApplicationContext(), ResultsActivity.class);
                         intent.putExtra("Info:",newResult);
                         startActivity(intent);
+                        finish();
                     }
                 }
             }

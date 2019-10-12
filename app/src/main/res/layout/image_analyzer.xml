@@ -22,17 +22,26 @@
             android:id="@+id/linear_layout_image_analyzer"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rel">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Draw a perimeter around the wound"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="20dp"
+                    android:layout_margin="10dp"
+                    android:id="@+id/instructions"
+                    />
+            </RelativeLayout>
 
         </LinearLayout>
     </FrameLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Draw a perimeter around the wound"
-        android:layout_gravity="bottom|start"
-        android:textSize="20dp"
-        android:layout_margin="10dp"
-        android:id="@+id/instructions"/>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_done"
@@ -40,6 +49,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@drawable/plus" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

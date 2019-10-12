@@ -138,6 +138,7 @@ public class Canvas extends View
     }
     public double getPixelsPerInch()
     {
+        if (inches.size() < 2) return -1;
         return Math.sqrt(Math.pow(inches.get(1)%100_000 - inches.get(0)%100_000,2) + Math.pow(inches.get(1)/100_000 - inches.get(0)/100_000,2));
     }
 }
